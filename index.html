@@ -1,0 +1,98 @@
+<!DOC TYPE html>
+<html>
+<head>
+  <title>simple crystal game</title>
+
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <style type="text/css">
+
+    .crystal-image {
+      width: 240px;
+      height: 240px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+
+	<div class="jumbotron">
+  <h1>May the Force Be With You!!</h1>
+  <p>Each lightsaber has a different value. Try and land on the target value exactly. You must bring balance to the force!</p>
+  
+</div>
+
+
+
+  <h1>Number to Guess: <span id="number-to-guess"></span></h1>
+
+  
+  <div id="crystals">
+  </div>
+
+ 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/game.js" ></script>
+  <script type="text/javascript">
+
+  var targetNumber = Math.floor(Math.random() * 100) + 19 ;
+
+  $("#number-to-guess").text(targetNumber);
+
+  var counter = 0;
+
+  
+  var numberOptions = [10, 5, 3, 7];
+
+
+  for (var i = 0; i < numberOptions.length; i++) {
+
+    
+    var imageCrystal = $("<img>");
+
+ 
+    imageCrystal.addClass("crystal-image");
+
+   
+    imageCrystal.attr("src", "http://www.iamfatterthanyou.com/blog/wp-content/uploads/2015/12/vadersvault4.jpg");
+
+
+    imageCrystal.attr("data-crystalvalue", numberOptions[i]);
+
+   
+    $("#crystals").append(imageCrystal);
+  }
+
+  $(".crystal-image").on("click", function() {
+
+    
+    
+    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = parseInt(crystalValue);
+   
+    counter += crystalValue;
+
+
+    alert("New score: " + counter);
+
+    if (counter === targetNumber) {
+      alert("You win!");
+      counter = 0;
+      targetNumber = Math.floor(Math.random() * 100) + 19 ;
+    }
+
+    else if (counter >= targetNumber) {
+      alert("You lose!!");
+      counter = 0;
+      targetNumber = Math.floor(Math.random() * 100) + 19 ;
+    }
+
+  });
+
+  </script>
+</div>
+</body>
+</html>
